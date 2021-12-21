@@ -19,7 +19,7 @@ RUN set -ex && \
     cd /tmp && \
     wget -q "https://downloads.apache.org/zookeeper/${PKG_NAME}/apache-${PKG_NAME}.tar.gz" && \
     wget -q "https://downloads.apache.org/zookeeper/${PKG_NAME}/apache-${PKG_NAME}.tar.gz.sha512" && \
-    sha1sum -c apache-${PKG_NAME}.tar.gz.sha512 && \
+    sha512sum -c apache-${PKG_NAME}.tar.gz.sha512 && \
     tar -zxf apache-${PKG_NAME}.tar.gz && \
     mkdir -m 0775 -p ${ZK_HOME}/bin ${ZK_HOME}/lib ${ZK_HOME}/conf ${ZK_HOME}/data ${ZK_HOME}/logs && \
     install -o 1000 -g 0 -m 775 "apache-${PKG_NAME}/bin/"*.sh ${ZK_HOME}/bin && \
