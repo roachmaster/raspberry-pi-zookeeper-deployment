@@ -31,5 +31,6 @@ RUN set -ex && \
 
 WORKDIR ${ZK_HOME}
 EXPOSE ${ZK_CLIENT_PORT} 2888 3888
+VOLUME ["${ZK_HOME}/data", "${ZK_HOME}/logs"]
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
