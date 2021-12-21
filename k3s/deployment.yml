@@ -29,7 +29,7 @@ spec:
       volumes:
         - name: mariadb-persistent-storage-dataDir
           persistentVolumeClaim:
-            claimName: zookeeper-pv-claim-dataDir
+            claimName: zookeeper-pv-claim
         - name: mariadb-persistent-storage-dataLogDir
           persistentVolumeClaim:
-            claimName: zookeeper-pv-claim-dataLogDir
+            claimName: zookeeper-pv-claim
