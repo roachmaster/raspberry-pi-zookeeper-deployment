@@ -19,6 +19,10 @@ node {
         }
     }
 
+    stage("Create Zoo keeper"){
+        sh "kubectl apply -f k3s/zookeeper.yml"
+    }
+
 //     stage("Create Secret"){
 //         withCredentials([usernamePassword(credentialsId: '8047ae57-cfa7-4ee1-86aa-be906b124593', passwordVariable: 'credPw', usernameVariable: 'credName')]) {
 //             k3sSecret name:"mysql-pass", credPw: "${credPw}"
