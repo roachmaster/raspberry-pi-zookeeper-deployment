@@ -24,18 +24,19 @@ RUN set -ex && \
     mkdir -m 0775 -p ${ZK_HOME}/bin ${ZK_HOME}/lib ${ZK_HOME}/conf ${ZK_HOME}/data ${ZK_HOME}/logs && \
     install -o 1000 -g 0 -m 775 "apache-${PKG_NAME}-bin/bin/"*.sh ${ZK_HOME}/bin && \
     install -o 1000 -g 0 -m 664 "apache-${PKG_NAME}-bin/lib/"*.jar ${ZK_HOME}/lib && \
+    cp -v apache-${PKG_NAME}-bin/* ${ZK_HOME}/conf && \
     rm -rf apache-${PKG_NAME}-bin apache-${PKG_NAME}-bin.tar.gz apache-${PKG_NAME}-bin.tar.gz.sha512
 
 # adding entrypoint and startup scripts
-COPY *.sh $ZK_HOME/bin/
-RUN chmod -x ${ZK_HOME}/bin/entrypoint.sh ${ZK_HOME}/bin/bootstrap.sh && \
-    chmod 777 ${ZK_HOME}/bin/entrypoint.sh ${ZK_HOME}/bin/bootstrap.sh
+#COPY *.sh $ZK_HOME/bin/
+#RUN chmod -x ${ZK_HOME}/bin/entrypoint.sh ${ZK_HOME}/bin/bootstrap.sh && \
+#    chmod 777 ${ZK_HOME}/bin/entrypoint.sh ${ZK_HOME}/bin/bootstrap.sh
 
 WORKDIR ${ZK_HOME}
-EXPOSE ${ZK_CLIENT_PORT} 2888 3888
-VOLUME ["${ZK_HOME}/data", "${ZK_HOME}/logs"]
+#EXPOSE ${ZK_CLIENT_PORT} 2888 3888
+#VOLUME ["${ZK_HOME}/data", "${ZK_HOME}/logs"]
 
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
-ENTRYPOINT ["entrypoint.sh"]
-CMD ["bootstrap.sh", "zkServer.sh", "start-foreground"]
+#ENTRYPOINT ["entrypoint.sh"]
+#CMD ["bootstrap.sh", "zkServer.sh", "start-foreground"]
