@@ -27,7 +27,7 @@ RUN set -ex && \
     rm -rf apache-${PKG_NAME}-bin apache-${PKG_NAME}-bin.tar.gz apache-${PKG_NAME}-bin.tar.gz.sha512
 
 # adding entrypoint and startup scripts
-COPY *.sh $ZK_HOME/bin/
+#COPY *.sh $ZK_HOME/bin/
 
 WORKDIR ${ZK_HOME}
 EXPOSE ${ZK_CLIENT_PORT} 2888 3888
