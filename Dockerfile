@@ -26,6 +26,7 @@ RUN set -ex && \
     install -o 1000 -g 0 -m 664 "apache-${PKG_NAME}-bin/lib/"*.jar ${ZK_HOME}/lib && \
     cp -v apache-${PKG_NAME}-bin/conf/* ${ZK_HOME}/conf && \
     mv -v ${ZK_HOME}/conf/zoo_sample.cfg ${ZK_HOME}/conf/zoo.cfg && \
+    sed -i -e '/dataDir=/ s/= .*/=\/opt\/zookeeper\/data\/' ${ZK_HOME}/conf/zoo.cfg && \
     rm -rf apache-${PKG_NAME}-bin apache-${PKG_NAME}-bin.tar.gz apache-${PKG_NAME}-bin.tar.gz.sha512
 
 # adding entrypoint and startup scripts
