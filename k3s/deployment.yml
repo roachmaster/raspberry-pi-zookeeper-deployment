@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-zookeeper
+  labels:
+    app: pi-zookeeper
+spec:
+  selector:
+    matchLabels:
+      app: pi-zookeeper
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pi-zookeeper
+    spec:
+      containers:
+        - image: jsurf/rpi-zookeeper
+          name: pi-zookeeper
+          ports:
+            - containerPort: 2181
+              name: pi-zookeeper
+          volumeMounts:
+            - name: mariadb-persistent-storage
+              mountPath: /var/lib/mariadb
+      volumes:
+        - name: mariadb-persistent-storage
+          persistentVolumeClaim:
+            claimName: mariadb-pv-claim
