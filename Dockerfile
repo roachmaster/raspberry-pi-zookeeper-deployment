@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-ARG PKG_VERSION=3.7.0
+ARG PKG_VERSION=3.6.3
 ARG PKG_NAME=zookeeper-${PKG_VERSION}
 ARG ZK_HOME=/opt/zookeeper
 ARG ZK_CLIENT_PORT=2181
@@ -17,14 +17,14 @@ RUN set -ex && \
     adduser -D -u 1000 -H -h ${ZK_HOME} ${ZK_USER} && \
     addgroup ${ZK_USER} root && \
     cd /tmp && \
-    wget -q "https://downloads.apache.org/zookeeper/${PKG_NAME}/apache-${PKG_NAME}.tar.gz" && \
-    wget -q "https://downloads.apache.org/zookeeper/${PKG_NAME}/apache-${PKG_NAME}.tar.gz.sha512" && \
-    sha512sum -c apache-${PKG_NAME}.tar.gz.sha512 && \
-    tar -zxf apache-${PKG_NAME}.tar.gz && \
+    wget -q "https://downloads.apache.org/zookeeper/${PKG_NAME}/apache-${PKG_NAME}-bin.tar.gz" && \
+    wget -q "https://downloads.apache.org/zookeeper/${PKG_NAME}/apache-${PKG_NAME}-bin.tar.gz.sha512" && \
+    sha512sum -c apache-${PKG_NAME}-bin.tar.gz.sha512 && \
+    tar -zxf apache-${PKG_NAME}-bin.tar.gz && \
     mkdir -m 0775 -p ${ZK_HOME}/bin ${ZK_HOME}/lib ${ZK_HOME}/conf ${ZK_HOME}/data ${ZK_HOME}/logs && \
-    install -o 1000 -g 0 -m 775 "apache-${PKG_NAME}/bin/"*.sh ${ZK_HOME}/bin && \
-    install -o 1000 -g 0 -m 664 "apache-${PKG_NAME}/"*.jar "apache-${PKG_NAME}/lib/"*.jar ${ZK_HOME}/lib && \
-    rm -rf apache-${PKG_NAME} apache-${PKG_NAME}.tar.gz apache-${PKG_NAME}.tar.gz.sha512
+    install -o 1000 -g 0 -m 775 "apache-${PKG_NAME}-bin/bin/"*.sh ${ZK_HOME}/bin && \
+    install -o 1000 -g 0 -m 664 "apache-${PKG_NAME}-bin/lib/"*.jar ${ZK_HOME}/lib && \
+    rm -rf apache-${PKG_NAME}-bin apache-${PKG_NAME}-bin.tar.gz apache-${PKG_NAME}-bin.tar.gz.sha512
 
 # adding entrypoint and startup scripts
 COPY *.sh $ZK_HOME/bin/
