@@ -22,9 +22,14 @@ spec:
             - containerPort: 2181
               name: pi-zookeeper
           volumeMounts:
-            - name: mariadb-persistent-storage
-              mountPath: /var/lib/mariadb
+            - name: mariadb-persistent-storage-dataDir
+              mountPath: /opt/zookeeper/data
+            - name: mariadb-persistent-storage-dataLogDir
+              mountPath: /opt/zookeeper/logs
       volumes:
-        - name: mariadb-persistent-storage
+        - name: mariadb-persistent-storage-dataDir
           persistentVolumeClaim:
-            claimName: mariadb-pv-claim
+            claimName: zookeeper-pv-claim-dataDir
+        - name: mariadb-persistent-storage-dataLogDir
+          persistentVolumeClaim:
+            claimName: zookeeper-pv-claim-dataLogDir

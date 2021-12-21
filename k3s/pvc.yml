@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: zookeeper-pv-claim
+  name: zookeeper-pv-claim-dataDir
   labels:
     app: pi-zookeeper
 spec:
