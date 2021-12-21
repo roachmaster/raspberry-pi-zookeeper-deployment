@@ -28,12 +28,13 @@ RUN set -ex && \
 
 # adding entrypoint and startup scripts
 COPY *.sh $ZK_HOME/bin/
+RUN chmod -x ${ZK_HOME}/bin/entrypoint.sh ${ZK_HOME}/bin/bootstrap.sh
 
 WORKDIR ${ZK_HOME}
 EXPOSE ${ZK_CLIENT_PORT} 2888 3888
 VOLUME ["${ZK_HOME}/data", "${ZK_HOME}/logs"]
 
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
-#ENTRYPOINT ["${ZK_HOME}/bin/entrypoint.sh"]
-#CMD ["${ZK_HOME}/bin/bootstrap.sh", "${ZK_HOME}/bin/zkServer.sh", "start-foreground"]
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["${ZK_HOME}/bin/entrypoint.sh"]
+CMD ["${ZK_HOME}/bin/bootstrap.sh", "${ZK_HOME}/bin/zkServer.sh", "start-foreground"]
