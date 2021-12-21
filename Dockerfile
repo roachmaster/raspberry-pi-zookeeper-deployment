@@ -17,14 +17,14 @@ RUN set -ex && \
     adduser -D -u 1000 -H -h ${ZK_HOME} ${ZK_USER} && \
     addgroup ${ZK_USER} root && \
     cd /tmp && \
-    wget -q "https://www.apache.org/dist/zookeeper/${PKG_NAME}/${PKG_NAME}.tar.gz" && \
-    wget -q "https://www.apache.org/dist/zookeeper/${PKG_NAME}/${PKG_NAME}.tar.gz.sha1" && \
+    wget -q "https://downloads.apache.org/zookeeper/${PKG_NAME}/${PKG_NAME}.tar.gz" && \
+    wget -q "https://downloads.apache.org/zookeeper/${PKG_NAME}/${PKG_NAME}.tar.gz.sha512" && \
     sha1sum -c ${PKG_NAME}.tar.gz.sha1 && \
     tar -zxf ${PKG_NAME}.tar.gz && \
     mkdir -m 0775 -p ${ZK_HOME}/bin ${ZK_HOME}/lib ${ZK_HOME}/conf ${ZK_HOME}/data ${ZK_HOME}/logs && \
     install -o 1000 -g 0 -m 775 "${PKG_NAME}/bin/"*.sh ${ZK_HOME}/bin && \
     install -o 1000 -g 0 -m 664 "${PKG_NAME}/"*.jar "${PKG_NAME}/lib/"*.jar ${ZK_HOME}/lib && \
-    rm -rf ${PKG_NAME} ${PKG_NAME}.tar.gz ${PKG_NAME}.tar.gz.sha1
+    rm -rf ${PKG_NAME} ${PKG_NAME}.tar.gz ${PKG_NAME}.tar.gz.sha512
 
 
 # adding entrypoint and startup scripts
