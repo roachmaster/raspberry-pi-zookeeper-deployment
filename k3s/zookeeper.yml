@@ -83,13 +83,13 @@ spec:
           command:
             - sh
             - -c
-            - "zkServer start"
+            - "zkServer.sh start"
           readinessProbe:
             exec:
               command:
                 - sh
                 - -c
-                - "zookeeper-ready 2181"
+                - "zookeeper-ready.sh 2181"
             initialDelaySeconds: 10
             timeoutSeconds: 5
           livenessProbe:
@@ -97,7 +97,7 @@ spec:
               command:
                 - sh
                 - -c
-                - "zookeeper-ready 2181"
+                - "zookeeper-ready.sh 2181"
             initialDelaySeconds: 10
             timeoutSeconds: 5
           volumeMounts:
