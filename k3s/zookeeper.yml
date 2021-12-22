@@ -101,7 +101,7 @@ spec:
             - name: datadir
               mountPath: /opt/zookeeper/data
             - name: myid-config
-              mountPath: /opt/zookeeper/data
+              mountPath: /tmp
       volumes:
         - name: myid-config
           configMap:
