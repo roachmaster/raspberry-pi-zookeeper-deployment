@@ -83,13 +83,10 @@ spec:
           command:
             - sh
             - -c
-            - "zkServer.sh start-foreground --config /opt/zookeeper/conf/zoo.cfg"
+            - "zkServer.sh start-foreground /opt/zookeeper/conf/"
           volumeMounts:
             - name: datadir
               mountPath: /opt/zookeeper/data
-#      securityContext:
-#        runAsUser: 1000
-#        fsGroup: 1000
   volumeClaimTemplates:
     - metadata:
         name: datadir
