@@ -81,12 +81,9 @@ spec:
             - containerPort: 3888
               name: leader-election
           command:
-            - tail
-            - -f
-            - /dev/null
-#            - sh
-#            - -c
-#            - "hostname; zkServer.sh start /opt/zookeeper/conf/zoo.cfg"
+            - sh
+            - -c
+            - "zkServer.sh start-foreground --config /opt/zookeeper/conf/zoo.cfg"
           volumeMounts:
             - name: datadir
               mountPath: /opt/zookeeper/data
