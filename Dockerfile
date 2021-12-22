@@ -31,7 +31,7 @@ RUN set -ex && \
 RUN sed -i "/dataDir=/d" ${ZK_HOME}/conf/zoo.cfg && \
     echo "dataDir=/opt/zookeeper/data" >> ${ZK_HOME}/conf/zoo.cfg && \
     cat ${ZK_HOME}/conf/zoo.cfg && \
-    chown -R ${ZK_USER} ${ZK_HOME}
+    chown -R ${ZK_USER} ${ZK_HOME} && \
     ls ${ZK_HOME}/conf && \
     ls ${ZK_HOME}/bin && \
     ls ${ZK_HOME}/lib
