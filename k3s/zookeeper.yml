@@ -96,7 +96,7 @@ spec:
           command:
             - sh
             - -c
-            - "chmod +x /opt/zookeeper/myid-config-setup.sh ; /opt/zookeeper/myid-config-setup.sh ; zkServer.sh start-foreground /opt/zookeeper/conf/zoo.cfg"
+            - "ls -la /opt/zookeeper ;chmod +x /opt/zookeeper/myid-config-setup.sh ; /opt/zookeeper/myid-config-setup.sh ; zkServer.sh start-foreground /opt/zookeeper/conf/zoo.cfg"
           volumeMounts:
             - name: datadir
               mountPath: /opt/zookeeper/data
