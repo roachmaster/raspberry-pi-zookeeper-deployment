@@ -83,7 +83,7 @@ spec:
           command:
             - sh
             - -c
-            - "zkServer.sh start-foreground /opt/zookeeper/conf/"
+            - "zkServer.sh start-foreground /opt/zookeeper/conf/zoo.cfg"
           volumeMounts:
             - name: datadir
               mountPath: /opt/zookeeper/data
