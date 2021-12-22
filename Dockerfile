@@ -32,8 +32,8 @@ RUN sed -i "/dataDir=/d" ${ZK_HOME}/conf/zoo.cfg && \
     echo "dataDir=/opt/zookeeper/data" >> ${ZK_HOME}/conf/zoo.cfg && \
     cat ${ZK_HOME}/conf/zoo.cfg && \
     ls ${ZK_HOME}/conf && \
-    ${ZK_HOME}/bin && \
-    ${ZK_HOME}/lib
+    ls ${ZK_HOME}/bin && \
+    ls ${ZK_HOME}/lib
 
 # adding entrypoint and startup scripts
 #COPY *.sh $ZK_HOME/bin/
