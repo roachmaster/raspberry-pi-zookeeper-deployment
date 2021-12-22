@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: myid-configMap
+  name: myid-configmap
 data:
   myid-config-setup.sh: |
     #!/bin/sh
@@ -105,7 +105,7 @@ spec:
       volumes:
         - name: myid-config
           configMap:
-            name: myid-configMap
+            name: myid-configmap
   volumeClaimTemplates:
     - metadata:
         name: datadir
