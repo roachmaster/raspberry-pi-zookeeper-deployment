@@ -1,4 +1,14 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myid-configMap
+data:
+  myid-config-setup.sh: |
+    #!/bin/sh
+    ZK_SERVER_ID=$((${HOSTNAME##*-}+1))
+    echo "${ZK_SERVER_ID}" > "$ZK_DATA_DIR/myid"
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: zk-hs
@@ -69,6 +79,9 @@ spec:
         - name: kubernetes-zookeeper
           imagePullPolicy: Always
           image: "leonardorocha1990/pi-zookeeper:1.0.0-SNAPSHOT"
+          env:
+            - name: ZK_DATA_DIR
+              value: /opt/zookeeper/data
           resources:
             requests:
               memory: "1Gi"
@@ -83,10 +96,16 @@ spec:
           command:
             - sh
             - -c
-            - "zkServer.sh start-foreground /opt/zookeeper/conf/zoo.cfg"
+            - "/opt/zookeeper/data/myid-config-setup.sh ;zkServer.sh start-foreground /opt/zookeeper/conf/zoo.cfg"
           volumeMounts:
             - name: datadir
               mountPath: /opt/zookeeper/data
+            - name: myid-config
+              mountPath: /opt/zookeeper/data
+      volumes:
+        - name: myid-config
+          configMap:
+            name: myid-configMap
   volumeClaimTemplates:
     - metadata:
         name: datadir
