@@ -96,12 +96,12 @@ spec:
           command:
             - sh
             - -c
-            - "ls -la /opt/zookeeper ;chmod +x /opt/zookeeper/myid-config-setup.sh ; /opt/zookeeper/myid-config-setup.sh ; zkServer.sh start-foreground /opt/zookeeper/conf/zoo.cfg"
+            - "cp /tmp/zookeeper/* /opt/zookeeper ; ls -la /opt/zookeeper ; chmod 777 /opt/zookeeper/myid-config-setup.sh;chmod +x /opt/zookeeper/myid-config-setup.sh ; /opt/zookeeper/myid-config-setup.sh ; zkServer.sh start-foreground /opt/zookeeper/conf/zoo.cfg"
           volumeMounts:
             - name: datadir
               mountPath: /opt/zookeeper/data
             - name: myid-config
-              mountPath: /opt/zookeeper
+              mountPath: /tmp/zookeeper
       volumes:
         - name: myid-config
           configMap:
