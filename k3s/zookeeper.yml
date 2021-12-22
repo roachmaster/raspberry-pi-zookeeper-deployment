@@ -83,23 +83,7 @@ spec:
           command:
             - sh
             - -c
-            - "zkServer.sh start"
-#          readinessProbe:
-#            exec:
-#              command:
-#                - sh
-#                - -c
-#                - "zookeeper-ready.sh 2181"
-#            initialDelaySeconds: 10
-#            timeoutSeconds: 5
-#          livenessProbe:
-#            exec:
-#              command:
-#                - sh
-#                - -c
-#                - "zookeeper-ready.sh 2181"
-#            initialDelaySeconds: 10
-#            timeoutSeconds: 5
+            - "zkServer.sh start /opt/zookeeper/conf/zoo.cfg"
           volumeMounts:
             - name: datadir
               mountPath: /opt/zookeeper/data
