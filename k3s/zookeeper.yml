@@ -15,12 +15,15 @@ metadata:
   labels:
     app: zk
 spec:
+  type: NodePort
   ports:
     - port: 2888
+      nodePort: 30288
       name: server
     - port: 3888
+      nodePort: 30388
       name: leader-election
-  clusterIP: None
+#  clusterIP: None
   selector:
     app: zk
 ---
