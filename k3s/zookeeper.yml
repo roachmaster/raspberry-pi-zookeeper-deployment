@@ -34,8 +34,10 @@ metadata:
   labels:
     app: zk
 spec:
+  type: NodePort
   ports:
     - port: 2181
+      nodePort: 30218
       name: client
   selector:
     app: zk
