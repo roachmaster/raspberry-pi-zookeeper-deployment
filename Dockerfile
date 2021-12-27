@@ -31,8 +31,8 @@ RUN set -ex && \
 RUN sed -i "/dataDir=/d" ${ZK_HOME}/conf/zoo.cfg && \
     echo "dataDir=/opt/zookeeper/data" >> ${ZK_HOME}/conf/zoo.cfg && \
     echo "server.1=zk-0.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
-    echo "server.2=zk-1.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
-    echo "server.3=zk-2.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
+#    echo "server.2=zk-1.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
+#    echo "server.3=zk-2.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
     cat ${ZK_HOME}/conf/zoo.cfg && \
     chown -R ${ZK_USER} ${ZK_HOME} && \
     chmod -R 777 /opt/zookeeper && \
