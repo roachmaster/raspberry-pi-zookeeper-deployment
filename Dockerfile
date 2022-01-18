@@ -31,8 +31,8 @@ RUN set -ex && \
 RUN sed -i "/dataDir=/d" ${ZK_HOME}/conf/zoo.cfg && \
     echo "dataDir=/opt/zookeeper/data" >> ${ZK_HOME}/conf/zoo.cfg && \
     echo "server.1=zk-0.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
-#    echo "server.2=zk-1.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
-#    echo "server.3=zk-2.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
+    echo "server.2=zk-1.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
+    echo "server.3=zk-2.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
     cat ${ZK_HOME}/conf/zoo.cfg && \
     chown -R ${ZK_USER} ${ZK_HOME} && \
     chmod -R 777 /opt/zookeeper && \
@@ -40,16 +40,4 @@ RUN sed -i "/dataDir=/d" ${ZK_HOME}/conf/zoo.cfg && \
     ls ${ZK_HOME}/bin && \
     ls ${ZK_HOME}/lib
 
-# adding entrypoint and startup scripts
-#COPY *.sh $ZK_HOME/bin/
-#RUN chmod -x ${ZK_HOME}/bin/entrypoint.sh ${ZK_HOME}/bin/bootstrap.sh && \
-#    chmod 777 ${ZK_HOME}/bin/entrypoint.sh ${ZK_HOME}/bin/bootstrap.sh
-
 WORKDIR ${ZK_HOME}
-#EXPOSE ${ZK_CLIENT_PORT} 2888 3888
-#VOLUME ["${ZK_HOME}/data", "${ZK_HOME}/logs"]
-
-
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
-#ENTRYPOINT ["entrypoint.sh"]
-#CMD ["bootstrap.sh", "zkServer.sh", "start-foreground"]

@@ -23,7 +23,6 @@ spec:
     - port: 3888
       nodePort: 30388
       name: leader-election
-#  clusterIP: None
   selector:
     app: zk
 ---
@@ -61,7 +60,7 @@ spec:
     matchLabels:
       app: zk
   serviceName: zk-hs
-  replicas: 1
+  replicas: 3
   updateStrategy:
     type: RollingUpdate
   podManagementPolicy: OrderedReady
