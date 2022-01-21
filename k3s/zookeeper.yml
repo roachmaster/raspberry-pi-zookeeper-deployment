@@ -78,8 +78,6 @@ spec:
               value: /opt/zookeeper/data
             - name: REPLICA_SET_NUM
               value: 3
-            - name: ZK_CLIENT_PORT
-              value: 2181
           resources:
             requests:
               memory: "1Gi"
