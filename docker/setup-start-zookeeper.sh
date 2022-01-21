@@ -4,7 +4,7 @@
 for (( i = 0; i < $REPLICA_SET_NUM; i++ ))
 do
   j=$((i+1)) ;
-  echo "server.${j}=zk-${i}.zk-hs:2888:3888"
+  echo "server.${j}=zk-${i}.zk-hs:2888:3888" >> /opt/zookeeper/conf/zoo.cfg
 done
 
 # set up cluster id based on statefulset number
