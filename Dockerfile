@@ -29,7 +29,7 @@ RUN set -ex && \
 COPY ./docker/zoo.cfg ./docker/setup-start-zookeeper.sh /tmp/
 
 RUN cp /tmp/zoo.cfg ${ZK_HOME}/conf/ && \
-    cp /tmp/setup-start-zookeeper.sh ${ZK_HOME}/bin \
+    cp /tmp/setup-start-zookeeper.sh ${ZK_HOME}/bin && \
     chmod 777 ${ZK_HOME}/conf/zoo.cfg ${ZK_HOME}/bin/setup-start-zookeeper.sh
 
 WORKDIR ${ZK_HOME}
