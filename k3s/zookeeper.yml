@@ -1,14 +1,4 @@
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: myid-configmap
-data:
-  myid-config-setup.sh: |
-    #!/bin/sh
-    ZK_SERVER_ID=$((${HOSTNAME##*-}+1))
-    echo "${ZK_SERVER_ID}" > "$ZK_DATA_DIR/myid"
----
-apiVersion: v1
 kind: Service
 metadata:
   name: zk-hs
@@ -86,6 +76,10 @@ spec:
           env:
             - name: ZK_DATA_DIR
               value: /opt/zookeeper/data
+            - name: REPLICA_SET_NUM
+              value: 3
+            - name: ZK_CLIENT_PORT
+              value: 2181
           resources:
             requests:
               memory: "1Gi"
@@ -100,16 +94,10 @@ spec:
           command:
             - sh
             - -c
-            - "cp /tmp/zookeeper/* /opt/zookeeper ; ls -la /opt/zookeeper ; chmod 777 /opt/zookeeper/myid-config-setup.sh;chmod +x /opt/zookeeper/myid-config-setup.sh ; /opt/zookeeper/myid-config-setup.sh ; zkServer.sh start-foreground /opt/zookeeper/conf/zoo.cfg"
+            - "setup-start-zookeeper.sh"
           volumeMounts:
             - name: datadir
               mountPath: /opt/zookeeper/data
-            - name: myid-config
-              mountPath: /tmp/zookeeper
-      volumes:
-        - name: myid-config
-          configMap:
-            name: myid-configmap
   volumeClaimTemplates:
     - metadata:
         name: datadir
@@ -117,4 +105,4 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 10Gi
+            storage: 5Gi

@@ -2,13 +2,11 @@ FROM openjdk:8-jdk-alpine
 ARG PKG_VERSION=3.6.3
 ARG PKG_NAME=zookeeper-${PKG_VERSION}
 ARG ZK_HOME=/opt/zookeeper
-ARG ZK_CLIENT_PORT=2181
 
 ENV PATH=$PATH:$ZK_HOME/bin \
     ZOO_LOG4J_PROP=INFO,CONSOLE \
     ZK_USER=zookeeper \
     ZK_HOME=${ZK_HOME}
-
 
 RUN apk add --no-cache bash
 
@@ -25,19 +23,13 @@ RUN set -ex && \
     install -o 1000 -g 0 -m 775 "apache-${PKG_NAME}-bin/bin/"*.sh ${ZK_HOME}/bin && \
     install -o 1000 -g 0 -m 664 "apache-${PKG_NAME}-bin/lib/"*.jar ${ZK_HOME}/lib && \
     cp -v apache-${PKG_NAME}-bin/conf/* ${ZK_HOME}/conf && \
-    mv -v ${ZK_HOME}/conf/zoo_sample.cfg ${ZK_HOME}/conf/zoo.cfg && \
-    rm -rf apache-${PKG_NAME}-bin apache-${PKG_NAME}-bin.tar.gz apache-${PKG_NAME}-bin.tar.gz.sha512
+    rm -rf apache-${PKG_NAME}-bin apache-${PKG_NAME}-bin.tar.gz apache-${PKG_NAME}-bin.tar.gz.sha512 && \
+    chown -R ${ZK_USER} ${ZK_HOME}
 
-RUN sed -i "/dataDir=/d" ${ZK_HOME}/conf/zoo.cfg && \
-    echo "dataDir=/opt/zookeeper/data" >> ${ZK_HOME}/conf/zoo.cfg && \
-    echo "server.1=zk-0.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
-    echo "server.2=zk-1.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
-    echo "server.3=zk-2.zk-hs:2888:3888" >> ${ZK_HOME}/conf/zoo.cfg && \
-    cat ${ZK_HOME}/conf/zoo.cfg && \
-    chown -R ${ZK_USER} ${ZK_HOME} && \
-    chmod -R 777 /opt/zookeeper && \
-    ls ${ZK_HOME}/conf && \
-    ls ${ZK_HOME}/bin && \
-    ls ${ZK_HOME}/lib
+COPY ./docker/zoo.cfg ./docker/setup-start-zookeeper.sh /tmp/
+
+RUN cp /tmp/zoo.cfg ${ZK_HOME}/conf/ && \
+    cp /tmp/setup-start-zookeeper.sh ${ZK_HOME}/bin \
+    chmod 777 ${ZK_HOME}/conf/zoo.cfg ${ZK_HOME}/bin/setup-start-zookeeper.sh
 
 WORKDIR ${ZK_HOME}
