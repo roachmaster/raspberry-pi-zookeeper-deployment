@@ -1,5 +1,5 @@
 #!/bin/bash -e
-
+pwd
 echo $REPLICA_SET_NUM
 echo $ZK_DATA_DIR
 #update zoo config, create for loop to do the following based on env var
