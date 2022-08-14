@@ -72,7 +72,7 @@ spec:
       containers:
         - name: kubernetes-zookeeper
           imagePullPolicy: Always
-          image: "leonardorocha1990/pi-zookeeper:1.0.0-SNAPSHOT"
+          image: "leonardorocha1990/pi-zookeeper:2.0.0-SNAPSHOT"
           env:
             - name: ZK_DATA_DIR
               value: /opt/zookeeper/data

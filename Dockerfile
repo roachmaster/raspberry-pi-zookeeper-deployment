@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM leonardorocha1990/raspberry-pi-64-alpine-jdk11:1.0.0-SNAPSHOT
 ARG PKG_VERSION=3.6.3
 ARG PKG_NAME=zookeeper-${PKG_VERSION}
 ARG ZK_HOME=/opt/zookeeper
